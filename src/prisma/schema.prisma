@@ -1,0 +1,217 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(SALES)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  ownedCompanies Company[]
+  quotes         Quote[]
+  auditLogs      AuditLog[]
+}
+
+enum Role { 
+  OWNER 
+  ADMIN 
+  SALES 
+  SUPPORT 
+  FINANCE 
+}
+
+model Company {
+  id            String   @id @default(cuid())
+  name          String
+  nit           String?  @unique
+  billing_email String?
+  phone         String?
+  address       String?
+  ownerId       String?
+  owner         User?    @relation(fields: [ownerId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  contacts      Contact[]
+  quotes        Quote[]
+  subscriptions Subscription[]
+  messages      Message[]
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId String
+  name      String
+  email     String?
+  phone     String?
+  role      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  quotes    Quote[]
+}
+
+model Provider {
+  id          String   @id @default(cuid())
+  name        String
+  contactEmail String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  products    Product[]
+}
+
+model Product {
+  id         String   @id @default(cuid())
+  provider   Provider @relation(fields: [providerId], references: [id])
+  providerId String
+  sku        String   @unique
+  name       String
+  currency   String
+  cost       Decimal  @db.Numeric(12,2)
+  listPrice  Decimal  @db.Numeric(12,2)
+  taxRate    Decimal  @db.Numeric(5,2)
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  // Relations
+  pricebook      PricebookEntry[]
+  subscriptions  Subscription[]
+  quoteItems     QuoteItem[]
+}
+
+model PricebookEntry {
+  id         String   @id @default(cuid())
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId  String
+  currency   String
+  price      Decimal  @db.Numeric(12,2)
+  validFrom  DateTime
+  validTo    DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Subscription {
+  id              String   @id @default(cuid())
+  company         Company  @relation(fields: [companyId], references: [id])
+  companyId       String
+  product         Product  @relation(fields: [productId], references: [id])
+  productId       String
+  qty             Int      @default(1)
+  startAt         DateTime
+  endAt           DateTime
+  nextRenewalAt   DateTime @index
+  termMonths      Int      @default(12)
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relations
+  renewalTasks    RenewalTask[]
+}
+
+model Quote {
+  id            String   @id @default(cuid())
+  company       Company  @relation(fields: [companyId], references: [id])
+  companyId     String
+  contact       Contact? @relation(fields: [contactId], references: [id])
+  contactId     String?
+  ownerId       String
+  owner         User     @relation(fields: [ownerId], references: [id])
+  status        String   @default("draft")
+  currency      String
+  subtotal      Decimal  @db.Numeric(12,2)
+  discount      Decimal  @db.Numeric(12,2) @default(0)
+  tax           Decimal  @db.Numeric(12,2) @default(0)
+  total         Decimal  @db.Numeric(12,2)
+  validUntil    DateTime
+  version       Int      @default(1)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  items         QuoteItem[]
+  payments      Payment[]
+}
+
+model QuoteItem {
+  id         String  @id @default(cuid())
+  quote      Quote   @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  quoteId    String
+  product    Product @relation(fields: [productId], references: [id])
+  productId  String
+  description String?
+  qty        Int
+  unitPrice  Decimal @db.Numeric(12,2)
+  discountPct Decimal @db.Numeric(5,2) @default(0)
+  taxRate    Decimal @db.Numeric(5,2)
+  total      Decimal @db.Numeric(12,2)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model RenewalTask {
+  id             String   @id @default(cuid())
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  subscriptionId String
+  dueAt          DateTime
+  stage          String   // T60 | T30 | T7
+  status         String   // queued | sent | delivered | failed | responded | converted
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String
+  channel   String   // email | whatsapp
+  direction String   // in | out
+  template  String?
+  body      String
+  meta      Json?
+  createdAt DateTime @default(now())
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  quote     Quote    @relation(fields: [quoteId], references: [id])
+  quoteId   String
+  provider  String   // wompi | stripe
+  amount    Decimal  @db.Numeric(12,2)
+  currency  String
+  status    String
+  externalRef String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  entity    String
+  entityId  String
+  action    String
+  diff      Json?
+  at        DateTime @default(now())
+}
