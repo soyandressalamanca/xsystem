@@ -1,6 +1,11 @@
-# XSystem - CRM Completo
+# XSystem Transformación Digital - CRM Completo
 
 Sistema de gestión de relaciones con clientes (CRM) con funcionalidades avanzadas de cotizaciones, renovaciones automáticas, mensajería WhatsApp/Email y pagos.
+
+[![GitHub](https://img.shields.io/badge/GitHub-soyandressalamanca%2Fxsystem-blue?style=flat-square&logo=github)](https://github.com/soyandressalamanca/xsystem)
+[![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma)](https://prisma.io/)
 
 ## 🚀 Características Principales
 
@@ -29,7 +34,7 @@ Sistema de gestión de relaciones con clientes (CRM) con funcionalidades avanzad
 
 1. **Clonar el repositorio**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/soyandressalamanca/xsystem.git
    cd xsystem
    ```
 
@@ -42,6 +47,68 @@ Sistema de gestión de relaciones con clientes (CRM) con funcionalidades avanzad
    ```bash
    cp .env.example .env.local
    ```
+   
+   Editar `.env.local` con tus configuraciones:
+   ```env
+   # Base de datos
+   DATABASE_URL="postgresql://usuario:password@localhost:5432/xsystem"
+   
+   # NextAuth
+   NEXTAUTH_URL="http://localhost:3000"
+   NEXTAUTH_SECRET="tu-secreto-aqui"
+   
+   # OAuth (opcional)
+   GOOGLE_CLIENT_ID=""
+   GOOGLE_CLIENT_SECRET=""
+   AZURE_AD_CLIENT_ID=""
+   AZURE_AD_CLIENT_SECRET=""
+   AZURE_AD_TENANT_ID=""
+   ```
+
+4. **Configurar base de datos**
+   ```bash
+   # Crear base de datos
+   npx prisma db push
+   
+   # Poblar con datos de prueba
+   npm run db:seed
+   ```
+
+5. **Ejecutar en desarrollo**
+   ```bash
+   npm run dev
+   ```
+   
+   La aplicación estará disponible en `http://localhost:3000`
+
+## 🔐 Credenciales de Prueba
+
+Para acceder al sistema, usa estas credenciales:
+
+- **Email:** `admin@xsystem.com`
+- **Contraseña:** `admin123`
+
+> 📝 **Nota:** Las credenciales están en el archivo `CREDENCIALES.md` para referencia.
+
+## 🎯 Funcionalidades Implementadas
+
+### ✅ Completadas
+- [x] **Autenticación completa** con NextAuth.js
+- [x] **Dashboard responsivo** con sidebar navegable
+- [x] **Sistema de login/registro** con validación
+- [x] **Base de datos** con esquema Prisma completo
+- [x] **UI moderna** con shadcn/ui y Tailwind CSS
+- [x] **Logout con confirmación** modal elegante
+- [x] **Navegación por roles** (RBAC básico)
+
+### 🚧 En Desarrollo
+- [ ] **Módulo CRM** - Gestión de empresas y contactos
+- [ ] **Sistema de cotizaciones** - Creación y envío
+- [ ] **Motor de renovaciones** - T-60/T-30/T-7
+- [ ] **Integración WhatsApp** - Cloud API
+- [ ] **Sistema de emails** - Resend integration
+- [ ] **Pagos y conciliación** - Wompi integration
+- [ ] **Generación de PDFs** - Cotizaciones
    
    Editar `.env.local` con tus credenciales:
    ```env
