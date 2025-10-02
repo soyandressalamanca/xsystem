@@ -10,10 +10,10 @@ export function HeroSection() {
       {/* Fondo de estrellas animadas */}
       <div className="absolute inset-0">
         {[...Array(100)].map((_, i) => {
-          // Usar un seed fijo para evitar diferencias entre servidor y cliente
+          // Usar un seed fijo y redondear para evitar diferencias de precisión
           const seed = i * 0.1
-          const left = (Math.sin(seed) * 50 + 50) % 100
-          const top = (Math.cos(seed) * 50 + 50) % 100
+          const left = Math.round(((Math.sin(seed) * 50 + 50) % 100) * 100) / 100
+          const top = Math.round(((Math.cos(seed) * 50 + 50) % 100) * 100) / 100
           const duration = 2 + (i % 3)
           const delay = (i % 10) * 0.2
           
@@ -82,11 +82,11 @@ export function HeroSection() {
       {/* Partículas flotantes */}
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => {
-          // Usar un seed fijo para evitar diferencias entre servidor y cliente
+          // Usar un seed fijo y redondear para evitar diferencias de precisión
           const seed = i * 0.2
-          const left = (Math.sin(seed * 1.5) * 40 + 50) % 100
-          const top = (Math.cos(seed * 1.3) * 40 + 50) % 100
-          const xOffset = Math.sin(seed * 2) * 10
+          const left = Math.round(((Math.sin(seed * 1.5) * 40 + 50) % 100) * 100) / 100
+          const top = Math.round(((Math.cos(seed * 1.3) * 40 + 50) % 100) * 100) / 100
+          const xOffset = Math.round((Math.sin(seed * 2) * 10) * 100) / 100
           const duration = 3 + (i % 4)
           const delay = (i % 5) * 0.4
           
