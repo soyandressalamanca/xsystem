@@ -50,8 +50,7 @@ export function AboutHero() {
       </div>
 
       {/* Contenido principal */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
-        <div className="text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-32 pb-16">
           {/* Título principal */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
