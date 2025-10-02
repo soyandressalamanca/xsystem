@@ -95,7 +95,7 @@ export function ContactForm() {
       transition={{ duration: 0.6 }}
       className="bg-gradient-to-br from-[#16438D] to-[#05171D] rounded-2xl p-8 border border-white/10 h-full flex flex-col"
     >
-      <div className="mb-8">
+      <div className="mb-8 text-center md:text-left">
         <h2 className="text-3xl font-bold text-white mb-4">Envíanos un Mensaje</h2>
         <p className="text-gray-300">
           Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas.

@@ -70,16 +70,16 @@ export function ContactMap() {
           transition={{ delay: 0.8 }}
           className="mb-16"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             {locations.map((office, index) => (
               <motion.div
                 key={office.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + index * 0.2 }}
-                className="bg-gradient-to-br from-[#16438D] to-[#05171D] rounded-2xl p-6 border border-white/10 hover:border-[#3C85C6]/50 transition-all duration-300"
+                className="bg-gradient-to-br from-[#16438D] to-[#05171D] rounded-2xl p-6 border border-white/10 hover:border-[#3C85C6]/50 transition-all duration-300 text-center md:text-left"
               >
-                <div className="flex items-start space-x-4 mb-4">
+                <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-4 mb-4">
                   <div className="p-3 rounded-xl bg-[#3C85C6]/20">
                     <MapPin className="h-6 w-6 text-[#3C85C6]" />
                   </div>
@@ -94,15 +94,15 @@ export function ContactMap() {
                 </div>
                 
                 <div className="space-y-3">
-                  <div className="flex items-start space-x-3">
-                    <MapPin className="h-4 w-4 text-[#3C85C6] mt-1 flex-shrink-0" />
-                    <p className="text-gray-300 text-sm">{office.address}</p>
+                  <div className="flex flex-col md:flex-row items-center md:items-start space-y-2 md:space-y-0 md:space-x-3">
+                    <MapPin className="h-4 w-4 text-[#3C85C6] flex-shrink-0" />
+                    <p className="text-gray-300 text-sm text-center md:text-left">{office.address}</p>
                   </div>
-                  <div className="flex items-center space-x-3">
+                  <div className="flex flex-col md:flex-row items-center md:items-center space-y-2 md:space-y-0 md:space-x-3">
                     <Phone className="h-4 w-4 text-[#3C85C6] flex-shrink-0" />
                     <a 
                       href={`tel:${office.phone.replace(/\s+/g, '').replace(/\+/g, '').replace(/\(/g, '').replace(/\)/g, '').replace(/\|/g, '').replace(/\s/g, '')}`}
-                      className="text-gray-300 text-sm hover:text-[#3C85C6] transition-colors cursor-pointer"
+                      className="text-gray-300 text-sm hover:text-[#3C85C6] transition-colors cursor-pointer text-center md:text-left"
                     >
                       {office.phone}
                     </a>

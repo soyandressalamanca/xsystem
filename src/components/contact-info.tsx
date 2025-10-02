@@ -71,7 +71,7 @@ export function ContactInfo() {
     >
       {/* Información de Contacto */}
       <div className="bg-gradient-to-br from-[#05171D] to-[#16438D] rounded-2xl p-8 border border-white/10 h-full flex flex-col">
-        <h3 className="text-2xl font-bold text-white mb-6">Información de Contacto</h3>
+        <h3 className="text-2xl font-bold text-white mb-6 text-center md:text-left">Información de Contacto</h3>
         
         <div className="space-y-6 flex-1">
           {contactMethods.map((method, index) => (
@@ -80,7 +80,7 @@ export function ContactInfo() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 + index * 0.1 }}
-              className="flex items-center space-x-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300"
+              className="flex items-center space-x-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 text-center md:text-left"
             >
               <div className={`p-3 rounded-xl bg-white/10 ${method.color} flex-shrink-0`}>
                 <method.icon className="h-6 w-6" />
