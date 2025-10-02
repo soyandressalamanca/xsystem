@@ -54,7 +54,7 @@ export function AboutPartners() {
   ]
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-b from-[#05171D] to-[#16438D] relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-black relative overflow-hidden">
       {/* Fondo decorativo */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{

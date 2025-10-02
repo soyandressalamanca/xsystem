@@ -21,8 +21,8 @@ export function AboutStats() {
     },
     {
       number: "50+",
-      label: "Partners Oficiales",
-      description: "Alianzas con las mejores marcas"
+      label: "Alianzas Estratégicas",
+      description: "Con las mejores marcas en tecnología del mundo"
     },
     {
       number: "1000+",
@@ -32,7 +32,7 @@ export function AboutStats() {
   ]
 
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-b from-[#16438D] to-[#05171D] relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-black relative overflow-hidden">
       {/* Fondo decorativo */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{

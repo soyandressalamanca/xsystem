@@ -5,7 +5,7 @@ import { ChevronDown, Sparkles, Users, Award, Target } from "lucide-react"
 
 export function AboutHero() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-black via-[#05171D] to-[#16438D] overflow-hidden">
+    <section className="relative min-h-screen bg-black overflow-hidden">
       {/* Fondo de estrellas animadas */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => {
@@ -84,37 +84,6 @@ export function AboutHero() {
           </p>
         </motion.div>
 
-        {/* Características destacadas */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-        >
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 bg-[#3C85C6] rounded-full flex items-center justify-center mb-4">
-              <Users className="h-8 w-8 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">25+ Años</h3>
-            <p className="text-gray-300">De experiencia en el mercado</p>
-          </div>
-          
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 bg-[#3C85C6] rounded-full flex items-center justify-center mb-4">
-              <Award className="h-8 w-8 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Soluciones Integrales</h3>
-            <p className="text-gray-300">Para transformación digital</p>
-          </div>
-          
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 bg-[#3C85C6] rounded-full flex items-center justify-center mb-4">
-              <Target className="h-8 w-8 text-white" />
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2">Partners Oficiales</h3>
-            <p className="text-gray-300">De las mejores marcas</p>
-          </div>
-        </motion.div>
 
         {/* Botón de scroll */}
         <motion.div

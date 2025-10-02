@@ -10,18 +10,29 @@ export function AboutMission() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={ref} className="py-20 bg-black relative overflow-hidden">
+      {/* Efecto de fondo sutil */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 20% 20%, #3C85C6 1px, transparent 1px),
+            radial-gradient(circle at 80% 80%, #16438D 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px, 120px 120px'
+        }}></div>
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#16438D] mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Nuestra Propuesta de Valor
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Nos dedicamos a proporcionar soluciones integrales y personalizadas que satisfagan las necesidades tecnológicas de nuestros clientes
           </p>
         </motion.div>
@@ -83,7 +94,7 @@ export function AboutMission() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16"
         >
-          <h3 className="text-3xl font-bold text-[#16438D] text-center mb-12">
+          <h3 className="text-3xl font-bold text-white text-center mb-12">
             Nuestros Valores
           </h3>
           
@@ -92,8 +103,8 @@ export function AboutMission() {
               <div className="w-16 h-16 bg-[#3C85C6] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Award className="h-8 w-8 text-white" />
               </div>
-              <h4 className="text-xl font-semibold text-[#16438D] mb-3">Excelencia</h4>
-              <p className="text-gray-600">
+              <h4 className="text-xl font-semibold text-white mb-3">Excelencia</h4>
+              <p className="text-gray-300">
                 Nos esforzamos por ofrecer la más alta calidad en todos nuestros servicios y soluciones.
               </p>
             </div>
@@ -102,8 +113,8 @@ export function AboutMission() {
               <div className="w-16 h-16 bg-[#3C85C6] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h4 className="text-xl font-semibold text-[#16438D] mb-3">Compromiso</h4>
-              <p className="text-gray-600">
+              <h4 className="text-xl font-semibold text-white mb-3">Compromiso</h4>
+              <p className="text-gray-300">
                 Estamos comprometidos con el éxito de nuestros clientes y su satisfacción a largo plazo.
               </p>
             </div>
@@ -112,8 +123,8 @@ export function AboutMission() {
               <div className="w-16 h-16 bg-[#3C85C6] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="h-8 w-8 text-white" />
               </div>
-              <h4 className="text-xl font-semibold text-[#16438D] mb-3">Innovación</h4>
-              <p className="text-gray-600">
+              <h4 className="text-xl font-semibold text-white mb-3">Innovación</h4>
+              <p className="text-gray-300">
                 Buscamos constantemente nuevas tecnologías y metodologías para mejorar nuestros servicios.
               </p>
             </div>

@@ -4,7 +4,7 @@ import { AboutHero } from '@/components/about-hero'
 import { AboutStats } from '@/components/about-stats'
 import { AboutMission } from '@/components/about-mission'
 import { AboutPartners } from '@/components/about-partners'
-import { AboutTeam } from '@/components/about-team'
+import { AboutCTA } from '@/components/about-cta'
 
 export default function About() {
   return (
@@ -24,8 +24,8 @@ export default function About() {
       {/* Partners Section */}
       <AboutPartners />
       
-      {/* Team Section */}
-      <AboutTeam />
+      {/* CTA Section */}
+      <AboutCTA />
       
       {/* Footer */}
       <Footer />
