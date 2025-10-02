@@ -41,10 +41,13 @@ export function AboutMission() {
               <h3 className="text-2xl font-bold">Misión</h3>
             </div>
             <p className="text-lg leading-relaxed mb-6">
-              <strong>En XSYSTEM, nos dedicamos a proporcionar soluciones integrales y personalizadas que satisfagan las necesidades tecnológicas de nuestros clientes.</strong> Nos esforzamos por ofrecer un servicio centrado en la satisfacción del cliente y la excelencia, combinando software innovador, asistencia técnica especializada, implementación acompañada y seguimiento constante.
+              <strong>En XSYSTEM, nos dedicamos a proporcionar soluciones integrales y personalizadas que satisfagan las necesidades tecnológicas de nuestros clientes.</strong> Nos esforzamos por ofrecer un servicio centrado en la satisfacción del cliente y la excelencia.
+            </p>
+            <p className="text-gray-300 mb-4">
+              Combinamos software innovador, asistencia técnica especializada, implementación acompañada y seguimiento constante para garantizar que nuestros clientes logren sus objetivos comerciales de manera exitosa.
             </p>
             <p className="text-gray-300">
-              Nuestro propósito es garantizar que nuestros clientes logren sus objetivos comerciales de manera exitosa y maximicen el valor de su inversión en tecnología.
+              Nuestro propósito es maximizar el valor de la inversión en tecnología de nuestros clientes.
             </p>
           </motion.div>
 
@@ -63,6 +66,9 @@ export function AboutMission() {
             </div>
             <p className="text-lg leading-relaxed mb-6">
               <strong>En XSYSTEM, aspiramos a ser el socio tecnológico preferido para empresas de todos los sectores, ofreciendo soluciones líderes en el mercado y un servicio excepcional.</strong> Buscamos destacarnos por nuestra capacidad para anticipar y satisfacer las demandas cambiantes del mercado.
+            </p>
+            <p className="text-gray-300 mb-4">
+              Nos enfocamos en la innovación y mejora continua, adaptándonos constantemente a las nuevas tecnologías y tendencias del sector para ofrecer soluciones de vanguardia.
             </p>
             <p className="text-gray-300">
               Nuestra visión es convertirnos en un referente en el sector tecnológico, contribuyendo al éxito y crecimiento sostenible de nuestros clientes en un entorno digital en constante evolución.
