@@ -10,7 +10,7 @@ export function AboutMission() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} className="py-20 bg-black relative overflow-hidden">
+    <section ref={ref} className="pt-2 pb-20 bg-black relative overflow-hidden">
       {/* Efecto de fondo sutil */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -37,7 +37,7 @@ export function AboutMission() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           {/* Misión */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

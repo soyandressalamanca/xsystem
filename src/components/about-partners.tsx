@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Image from "next/image"
 
 export function AboutPartners() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const [selectedCategory, setSelectedCategory] = useState("Todos")
 
   const partners = [
     // Microsoft y Azure
@@ -44,26 +45,62 @@ export function AboutPartners() {
   ]
 
   const categories = [
-    { name: "Cloud & AI", color: "from-blue-500 to-blue-600" },
-    { name: "Creative", color: "from-purple-500 to-purple-600" },
-    { name: "AECO", color: "from-green-500 to-green-600" },
-    { name: "CRM", color: "from-orange-500 to-orange-600" },
-    { name: "Security", color: "from-red-500 to-red-600" },
-    { name: "Visualization", color: "from-pink-500 to-pink-600" },
-    { name: "Tools", color: "from-gray-500 to-gray-600" }
+    { name: "All", color: "bg-[#3C85C6]" },
+    { name: "Cloud & AI", color: "bg-[#3C85C6]" },
+    { name: "Creative", color: "bg-[#3C85C6]" },
+    { name: "AECO", color: "bg-[#3C85C6]" },
+    { name: "CRM", color: "bg-[#3C85C6]" },
+    { name: "Security", color: "bg-[#3C85C6]" },
+    { name: "Visualization", color: "bg-[#3C85C6]" },
+    { name: "Tools", color: "bg-[#3C85C6]" }
   ]
+
+  const filteredPartners = selectedCategory === "Todos" 
+    ? partners 
+    : partners.filter(partner => partner.category === selectedCategory)
 
   return (
     <section ref={ref} className="py-20 bg-black relative overflow-hidden">
-      {/* Fondo decorativo */}
-      <div className="absolute inset-0 opacity-10">
+      {/* Fondo decorativo - Malla tecnológica */}
+      <div className="absolute inset-0 opacity-15">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(45deg, #3C85C6 1px, transparent 1px),
-            linear-gradient(-45deg, #3C85C6 1px, transparent 1px)
+            linear-gradient(90deg, #3C85C6 1px, transparent 1px),
+            linear-gradient(0deg, #3C85C6 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px'
+          backgroundSize: '50px 50px'
         }}></div>
+      </div>
+
+      {/* Partículas flotantes */}
+      <div className="absolute inset-0">
+        {[...Array(30)].map((_, i) => {
+          const seed = i * 0.15
+          const left = Math.round(((Math.sin(seed * 1.2) * 45 + 50) % 100) * 100) / 100
+          const top = Math.round(((Math.cos(seed * 0.8) * 45 + 50) % 100) * 100) / 100
+          const duration = 4 + (i % 3)
+          const delay = (i % 6) * 0.3
+          
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-[#3C85C6] rounded-full"
+              style={{
+                left: `${left}%`,
+                top: `${top}%`,
+              }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 1.2, 0],
+              }}
+              transition={{
+                duration: duration,
+                repeat: Infinity,
+                delay: delay,
+              }}
+            />
+          )
+        })}
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -89,12 +126,15 @@ export function AboutPartners() {
           className="flex flex-wrap justify-center gap-4 mb-12"
         >
           {categories.map((category, index) => (
-            <div
+            <button
               key={index}
-              className={`px-4 py-2 rounded-full bg-gradient-to-r ${category.color} text-white text-sm font-medium`}
+              onClick={() => setSelectedCategory(category.name)}
+              className={`px-4 py-2 rounded-full ${category.color} text-white text-sm font-medium transition-all duration-300 hover:opacity-80 ${
+                selectedCategory === category.name ? 'ring-2 ring-white/50' : ''
+              }`}
             >
               {category.name}
-            </div>
+            </button>
           ))}
         </motion.div>
 
@@ -105,7 +145,7 @@ export function AboutPartners() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6"
         >
-          {partners.map((partner, index) => (
+          {filteredPartners.map((partner, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}

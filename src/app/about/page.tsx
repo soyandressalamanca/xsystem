@@ -15,11 +15,11 @@ export default function About() {
       {/* Hero Section */}
       <AboutHero />
       
-      {/* Stats Section */}
-      <AboutStats />
-      
-      {/* Mission & Vision */}
+      {/* Mission & Vision (Propuesta de Valor) */}
       <AboutMission />
+      
+      {/* Stats Section (Números) */}
+      <AboutStats />
       
       {/* Partners Section */}
       <AboutPartners />

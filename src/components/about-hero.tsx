@@ -5,52 +5,20 @@ import { ChevronDown, Sparkles, Users, Award, Target } from "lucide-react"
 
 export function AboutHero() {
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden">
-      {/* Fondo de estrellas animadas */}
-      <div className="absolute inset-0">
-        {[...Array(50)].map((_, i) => {
-          // Usar un seed fijo y redondear para evitar diferencias de precisión
-          const seed = i * 0.1
-          const left = Math.round(((Math.sin(seed) * 50 + 50) % 100) * 100) / 100
-          const top = Math.round(((Math.cos(seed) * 50 + 50) % 100) * 100) / 100
-          const duration = 3 + (i % 4)
-          const delay = (i % 8) * 0.3
-          
-          return (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-white rounded-full"
-              style={{
-                left: `${left}%`,
-                top: `${top}%`,
-              }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-              }}
-              transition={{
-                duration: duration,
-                repeat: Infinity,
-                delay: delay,
-              }}
-            />
-          )
-        })}
-      </div>
-
-      {/* Grid tecnológico de fondo */}
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative pt-32 pb-16 bg-gradient-to-b from-black via-[#05171D] to-black overflow-hidden">
+      {/* Efecto de fondo sutil */}
+      <div className="absolute inset-0 opacity-20">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(90deg, #3C85C6 1px, transparent 1px),
-            linear-gradient(0deg, #3C85C6 1px, transparent 1px)
+            radial-gradient(circle at 25% 25%, #3C85C6 1px, transparent 1px),
+            radial-gradient(circle at 75% 75%, #16438D 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: '60px 60px, 80px 80px'
         }}></div>
       </div>
 
       {/* Contenido principal */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center pt-32 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
         {/* Título principal */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -90,7 +58,7 @@ export function AboutHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16"
+          className="mt-8"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}

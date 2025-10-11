@@ -1,24 +1,24 @@
+"use client"
+
 import * as React from "react"
 import Image from "next/image"
+import { useTheme } from "next-themes"
 import { 
   LayoutDashboard, 
   Building2, 
   Users, 
   FileText, 
   Calendar, 
-  Database, 
   CreditCard, 
   BarChart3, 
   Settings, 
   Minus, 
   Plus,
   MessageSquare,
-  Mail,
-  Phone,
-  LogOut,
-  User,
-  Bell,
-  Shield
+  Target,
+  UserPlus,
+  PackageCheck,
+  RefreshCw
 } from "lucide-react"
 
 import {
@@ -61,20 +61,20 @@ const data = {
       icon: Building2,
       items: [
         {
-          title: "Empresas",
-          url: "/crm/companies",
+          title: "Clientes",
+          url: "/dashboard/crm/clients",
+        },
+        {
+          title: "Leads",
+          url: "/dashboard/crm/leads",
         },
         {
           title: "Contactos",
-          url: "/crm/contacts",
+          url: "/dashboard/crm/contacts",
         },
         {
           title: "Oportunidades",
-          url: "/crm/opportunities",
-        },
-        {
-          title: "Actividades",
-          url: "/crm/activities",
+          url: "/dashboard/crm/opportunities",
         },
       ],
     },
@@ -84,43 +84,51 @@ const data = {
       icon: FileText,
       items: [
         {
-          title: "Todas las Cotizaciones",
-          url: "/quotes",
+          title: "Todas",
+          url: "/dashboard/quotes",
         },
         {
           title: "Nueva Cotización",
-          url: "/quotes/new",
+          url: "/dashboard/quotes/new",
         },
         {
           title: "Plantillas",
-          url: "/quotes/templates",
+          url: "/dashboard/quotes/templates",
         },
         {
           title: "Productos",
-          url: "/products",
+          url: "/dashboard/quotes/products",
         },
       ],
     },
     {
       title: "Suscripciones",
       url: "#",
-      icon: Calendar,
+      icon: PackageCheck,
       items: [
         {
-          title: "Todas las Suscripciones",
-          url: "/subscriptions",
+          title: "Activas",
+          url: "/dashboard/subscriptions/active",
         },
         {
-          title: "Renovaciones T-60",
-          url: "/subscriptions/renewals?stage=T60",
+          title: "Renovaciones 90 días",
+          url: "/dashboard/subscriptions/renewals/90",
         },
         {
-          title: "Renovaciones T-30",
-          url: "/subscriptions/renewals?stage=T30",
+          title: "Renovaciones 60 días",
+          url: "/dashboard/subscriptions/renewals/60",
         },
         {
-          title: "Renovaciones T-7",
-          url: "/subscriptions/renewals?stage=T7",
+          title: "Renovaciones 30 días",
+          url: "/dashboard/subscriptions/renewals/30",
+        },
+        {
+          title: "Renovaciones 7 días",
+          url: "/dashboard/subscriptions/renewals/7",
+        },
+        {
+          title: "Vencidas",
+          url: "/dashboard/subscriptions/expired",
         },
       ],
     },
@@ -131,19 +139,19 @@ const data = {
       items: [
         {
           title: "WhatsApp",
-          url: "/communication/whatsapp",
+          url: "/dashboard/communication/whatsapp",
         },
         {
           title: "Email",
-          url: "/communication/email",
+          url: "/dashboard/communication/email",
         },
         {
           title: "Plantillas",
-          url: "/communication/templates",
+          url: "/dashboard/communication/templates",
         },
         {
           title: "Historial",
-          url: "/communication/history",
+          url: "/dashboard/communication/history",
         },
       ],
     },
@@ -154,15 +162,15 @@ const data = {
       items: [
         {
           title: "Transacciones",
-          url: "/payments/transactions",
+          url: "/dashboard/payments/transactions",
         },
         {
           title: "Conciliación",
-          url: "/payments/reconciliation",
+          url: "/dashboard/payments/reconciliation",
         },
         {
-          title: "Reportes de Pago",
-          url: "/payments/reports",
+          title: "Reportes",
+          url: "/dashboard/payments/reports",
         },
       ],
     },
@@ -173,19 +181,19 @@ const data = {
       items: [
         {
           title: "Dashboard Ejecutivo",
-          url: "/reports/executive",
+          url: "/dashboard/reports/executive",
         },
         {
           title: "Ventas",
-          url: "/reports/sales",
+          url: "/dashboard/reports/sales",
         },
         {
           title: "Renovaciones",
-          url: "/reports/renewals",
+          url: "/dashboard/reports/renewals",
         },
         {
-          title: "Clientes",
-          url: "/reports/customers",
+          title: "Marketing",
+          url: "/dashboard/reports/marketing",
         },
       ],
     },
@@ -195,20 +203,20 @@ const data = {
       icon: Settings,
       items: [
         {
-          title: "Usuarios",
-          url: "/settings/users",
-        },
-        {
-          title: "Roles y Permisos",
-          url: "/settings/roles",
+          title: "Usuarios y Permisos",
+          url: "/dashboard/settings/users",
         },
         {
           title: "Integraciones",
-          url: "/settings/integrations",
+          url: "/dashboard/settings/integrations",
+        },
+        {
+          title: "Automatizaciones",
+          url: "/dashboard/settings/automations",
         },
         {
           title: "General",
-          url: "/settings/general",
+          url: "/dashboard/settings/general",
         },
       ],
     },
@@ -216,6 +224,16 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { theme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  // Evitar hydration mismatch
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const logoSrc = !mounted ? "/Logo Xsystem Blanco 2.png" : (theme === "light" ? "/logo xsystem.png" : "/Logo Xsystem Blanco 2.png")
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -225,7 +243,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <a href="/dashboard">
                 <div className="flex w-full items-center justify-center py-4">
                   <Image 
-                    src="/logo xsystem.png" 
+                    src={logoSrc}
                     alt="XSystem Logo" 
                     width={140} 
                     height={70}

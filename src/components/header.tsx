@@ -9,8 +9,8 @@ import { useState } from "react"
 const menuItems = [
   { name: "Inicio", href: "/" },
   { name: "Acerca", href: "/about" },
-  { name: "Productos", href: "#services" },
-  { name: "Servicios", href: "#services" },
+  { name: "Productos", href: "/products" },
+  { name: "Servicios", href: "/services" },
   { name: "FAQ", href: "/faq" },
   { name: "Contacto", href: "/contact" }
 ]

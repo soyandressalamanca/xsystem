@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ChevronDown, Sparkles, Zap, Globe, Shield, Cpu } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 
 export function HeroSection() {
@@ -233,7 +234,7 @@ export function HeroSection() {
 
         {/* Botones CTA */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 mb-16"
+          className="flex flex-col sm:flex-row gap-6 mb-16 items-center justify-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.5 }}
@@ -250,17 +251,19 @@ export function HeroSection() {
             <span>Descubre Nuestros Servicios</span>
           </motion.button>
           
-          <motion.button
-            className="px-8 py-4 border-2 border-[#3C85C6] text-[#3C85C6] font-semibold rounded-full hover:bg-[#3C85C6] hover:text-white transition-all duration-300"
-            whileHover={{ 
-              scale: 1.05,
-              backgroundColor: "#3C85C6",
-              color: "white"
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contactar Ahora
-          </motion.button>
+          <Link href="/contact">
+            <motion.button
+              className="px-8 py-4 border-2 border-[#3C85C6] text-[#3C85C6] font-semibold rounded-full hover:bg-[#3C85C6] hover:text-white transition-all duration-300"
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: "#3C85C6",
+                color: "white"
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contactar Ahora
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Indicador de scroll */}

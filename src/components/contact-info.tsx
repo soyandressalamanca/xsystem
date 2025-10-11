@@ -91,14 +91,14 @@ export function ContactInfo() {
                 {method.title.includes("Servicio al Cliente") || method.title.includes("Asistencia Técnica") ? (
                   <a 
                     href={`tel:${method.value.replace(/\s+/g, '').replace(/\+/g, '')}`}
-                    className="text-[#3C85C6] font-semibold text-base hover:text-[#16438D] transition-colors cursor-pointer"
+                    className="text-white font-semibold text-base hover:text-[#3C85C6] transition-colors cursor-pointer"
                   >
                     {method.value}
                   </a>
                 ) : (
                   <a 
                     href={`mailto:${method.value}`}
-                    className="text-[#3C85C6] font-semibold text-base hover:text-[#16438D] transition-colors cursor-pointer"
+                    className="text-white font-semibold text-base hover:text-[#3C85C6] transition-colors cursor-pointer"
                   >
                     {method.value}
                   </a>

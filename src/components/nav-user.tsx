@@ -5,7 +5,10 @@ import {
   LogOut,
   User,
   Shield,
+  Moon,
+  Sun,
 } from "lucide-react"
+import { useTheme } from "next-themes"
 import {
   Avatar,
   AvatarFallback,
@@ -38,6 +41,7 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const { theme, setTheme } = useTheme()
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -99,6 +103,22 @@ export function NavUser({
                   <Shield className="mr-2 h-4 w-4" />
                   <span>Seguridad</span>
                 </a>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+                {theme === "light" ? (
+                  <>
+                    <Moon className="mr-2 h-4 w-4" />
+                    <span>Modo Oscuro</span>
+                  </>
+                ) : (
+                  <>
+                    <Sun className="mr-2 h-4 w-4" />
+                    <span>Modo Claro</span>
+                  </>
+                )}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
